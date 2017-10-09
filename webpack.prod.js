@@ -2,6 +2,8 @@
  * Created by roboterra_rd on 2017/9/29.
  */
 const webpack = require('webpack');
+// 这里引用package.json的时候  要写上./  如果不写的话  是会报错的  找不到package.json文件
+const pkg = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports ={
@@ -11,10 +13,13 @@ module.exports ={
     devtool: 'eval-source-map',
     // __dirname 会获取当前文件的目录，不包括当前文件，但是 __filename 也是路径，包括文件本身，二者均是node自带的全局变量
     // 有了这两个全局变量的路径，后边添加的路径要使用绝对路径，因为他是按照据对路径的解析方式拼接
-    entry:__dirname + '/app/main.js',// 唯一的入口文件
+    entry: {
+        app:__dirname +'/app/main.js',// 唯一的入口文件
+        vendor:Object.keys(pkg.dependencies),// 将第三方依赖（package.json对象中的dependencies拿到） 用的是es6的语法 返回值为对象或者数组的下标
+    },
     output:{
-        path:__dirname + '/dev',// 打包后的文件存放的地方
-        filename: 'bundle.js'// 打包后输出文件的文件名
+        path:__dirname + '/build',// 打包后的文件存放的地方
+        filename: 'js/[name].[hash:4].js'// 打包后输出文件的文件名
     },
     devServer: {
         contentBase: "./public",//本地服务器所加载的页面所在的目录
@@ -51,6 +56,7 @@ module.exports ={
             {
                 test: /\.css$/,
                 use:ExtractTextPlugin.extract({
+                    //extract-text-webpack-plugin该插件的主要是为了抽离css样式,防止将样式打包在js中引起页面样式加载错乱的现象
                     fallback:  "style-loader",//将所有的计算后的样式加入页面中
                     use:[// 这里的use  参数值可以是数组也可以是字符串也可以是对象   可以根据文档轻松获得使用方法
                         //https://webpack.js.org/plugins/extract-text-webpack-plugin/
@@ -87,11 +93,10 @@ module.exports ={
         new HtmlWebpackPlugin({
             template:__dirname + "/app/index.tmp.html" //new 一个这个插件的实例，并传入相关的参数 如果入口的index.html每次引用不同的js文件，那么这个插件的使用就会在导出目录中自动生成一个index.html 并且引用着正确的js文件（js有哈希的后缀名）
         }),
-        new ExtractTextPlugin('[name].[chunkhash:8].css'),//将css文件从js文件中分离出来  一般的产品环境需要
-        //这里是为了定义是开发环境还是产品环境
+        new ExtractTextPlugin('[name].[hash:8].css'),//将css文件从js文件中分离出来  一般的产品环境需要
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"dev"'
+                NODE_ENV: '"production"'
             }
         }),
 

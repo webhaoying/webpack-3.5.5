@@ -17,6 +17,7 @@
 *, *:before, *:after {
     -webkit-box-sizing: inherit;
             box-sizing: inherit;
+    /*color: #ff0000;*/
 }
 
 body {

@@ -11,6 +11,8 @@
 ```` 
     npm install webpack -g          // 全局安装webpack
     npm install webpack --save-dev  // 本地安装webpack
+    npm install  // 默认会安装两种依赖
+    npm install --production  //只安装dependencies而不安装devDependencies。
 ````
 * 2、如果不在全局安装只在本地安装的话，命令会比较繁琐。比如
 
@@ -67,3 +69,30 @@ npm install --save-dev style-loader css-loader
 ````
 npm install --save-dev postcss-loader autoprefixer
 ````
+  * 6、webpack的配置文件的处理
+  >默认的配置文件，就是当前目录下的webpack.config.js文件，如果需要指定另外的配置文件，可以执行webpack --config webpack.custom.config.js(名字随意命名)
+  >> webpack --display-error-details 显示错误的详情
+  > webpack的使用和browserify有些类似，下面列举几个常用命令：
+  `````
+  webpack 最基本的启动webpack命令
+  webpack -w 提供watch方法，实时进行打包更新
+  webpack -p 对打包后的文件进行压缩
+  webpack -d 提供SourceMaps，方便调试  就是将错误定位到具体的js组件 而不是值提示bundle.js出问题了
+  webpack --colors 输出结果带彩色，比如：会用红色显示耗时较长的步骤
+  webpack --profile 输出性能数据，可以看到每一步的耗时
+  webpack --display-modules 默认情况下 node_modules 下的模块会被隐藏，加上这个参数可以显示这些被隐藏的模块
+  webpack --display-error-details 显示错误的详情
+  `````
+  * 7、webpack关于开发配置和产品环境
+  ````
+  "scripts": {
+  "start": "NODE_ENV=dev webpack-dev-server --progress --colors",
+  "build": "rm -rf ./build && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors"
+  },
+  ````
+  >这两个命令主要有以下区别：
+   
+   - 前者中默认使用 webpack.config.js 作为配置文件，而后者中强制使用 webpack.production.config.js 作为配置文件
+   - 前者 `NODE_ENV=dev` 而后者 `NODE_ENV=production` ，标识不同的环境。而这个 `"dev" "production"` 可以在代码中通过 `process.env.NODE_ENV` 获取。
+    - 前者中默认使用 webpack.config.js 作为配置文件，而后者中强制使用 webpack.production.config.js 作为配置文件
+     

@@ -5,6 +5,7 @@ import React from 'react';
 import config from './config.json';
 import styles from './Greeter.css';
 import styles1 from './Greeter1.css';
+
 export default class Greeter extends React.Component{
     render(){
         return(
