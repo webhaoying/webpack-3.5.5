@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "  NODE_ENV=dev webpack --progress --colors",
-    "build": " NODE_ENV=production webpack --config ./webpack.prod.js  --progress --colors ",
-    "server": "webpack-dev-server --open",
+    "start": "  NODE_ENV='dev' webpack --progress --colors",
+    "build": " NODE_ENV='这里定义为产品环境' webpack --config ./webpack.prod.js  --progress --colors ",
+    "server": "NODE_ENV='这里定义NODE_ENV这个nodeJs的全局变量成dev，即开发版本'  webpack-dev-server --open",
     "arg": "node app/arg --ss  tom"
   },
   "repository": {

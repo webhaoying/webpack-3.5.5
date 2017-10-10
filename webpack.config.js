@@ -16,6 +16,10 @@ module.exports ={
         path:__dirname + '/dev',// 打包后的文件存放的地方
         filename: 'bundle.js'// 打包后输出文件的文件名
     },
+    // 这里是用来扩展，就是可以回头引入的时候省略后缀之类的
+    resolve:{
+        extensions:[' ','.js','.jsx']
+    },
     devServer: {
         contentBase: "./public",//本地服务器所加载的页面所在的目录
         historyApiFallback: true,//不跳转
@@ -91,7 +95,9 @@ module.exports ={
         //这里是为了定义是开发环境还是产品环境
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"dev"'
+                // NODE_ENV: '"dev"',
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+                //  因为在package.json中已经在服务器启用的时候，已经定义了全局变量NODE_ENV 这里只是定义一个前端的全局变量，目的就是为了能够拿到项目状态是开发还是产品
             }
         }),
 

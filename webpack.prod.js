@@ -9,8 +9,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports ={
     // 整个配置文件的解读，建议浏览 http://www.jianshu.com/p/42e11515c10f
     // devtool 这个是为了便于调试的时候及时发现错误，如果没有这个设置，错误只提示你bundle.js出错，但不能定位具体是哪个js文件
-    // 本质就是在打包bundle的时候，生成一个资源树，这个树就辅助了错误定位。
-    devtool: 'eval-source-map',
+    // 本质就是在打包bundle的时候，生成一个资源树，这个树就辅助了错误定位。只是在开发阶段使用，但是产品阶段不要设置。
+    // devtool: 'eval-source-map',
     // __dirname 会获取当前文件的目录，不包括当前文件，但是 __filename 也是路径，包括文件本身，二者均是node自带的全局变量
     // 有了这两个全局变量的路径，后边添加的路径要使用绝对路径，因为他是按照据对路径的解析方式拼接
     entry: {
@@ -19,7 +19,7 @@ module.exports ={
     },
     output:{
         path:__dirname + '/build',// 打包后的文件存放的地方
-        filename: 'js/[name].[hash:4].js'// 打包后输出文件的文件名
+        filename: 'js/[name].[hash:8].js'// 打包后输出文件的文件名  这个[name] 就是取值entry中的键值，[hash：4]分别代表哈希数字以及位数，
     },
     devServer: {
         contentBase: "./public",//本地服务器所加载的页面所在的目录
@@ -94,9 +94,12 @@ module.exports ={
             template:__dirname + "/app/index.tmp.html" //new 一个这个插件的实例，并传入相关的参数 如果入口的index.html每次引用不同的js文件，那么这个插件的使用就会在导出目录中自动生成一个index.html 并且引用着正确的js文件（js有哈希的后缀名）
         }),
         new ExtractTextPlugin('[name].[hash:8].css'),//将css文件从js文件中分离出来  一般的产品环境需要
+        //定义这个process.env.NODE_ENV 这个字段来判断项目所属的环境是研发环境还是生产环境
+        // 有了这个字段的值  以后在js文件中就可以直接用'process.env.NODE_ENV==="production" '来获取和更新属性值，目前没有发现什么特别有用的地方，仅仅是表征一个开发或者产品状态的字段
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"production"'
+                // NODE_ENV: '"production"'
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
             }
         }),
 
