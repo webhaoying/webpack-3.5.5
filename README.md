@@ -1,4 +1,5 @@
 # webpack-3.5.5
+# master 分支是一个完整的webpack配置文件结构 dev分支是一个可以根据项目不停改变的分支
 ## webpack的安装使用  
  ### 内容借鉴了[简书-webpack配置详解](http://www.jianshu.com/p/42e11515c10f)
  * 1、建议全局、本地仓库均安装webpack
