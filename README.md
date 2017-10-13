@@ -17,11 +17,11 @@
 ````
 * 2、如果不在全局安装只在本地安装的话，命令会比较繁琐。比如
 
-   想要将根目录下的'/app/app.js'  编译后输出到'/build/main.js'.
+   想要将根目录下的'/app/app.js'  编译后输出到'/build/login.js'.
   
 ```` 
-  node_modules/.bin/webpack app/main.js public/bundle.js   //未全局安装webpack
-  webpack app/main.js public/bundle.js   //全局安装webpack
+  node_modules/.bin/webpack app/login.js public/bundle.js   //未全局安装webpack
+  webpack app/login.js public/bundle.js   //全局安装webpack
 ````
 * 3、鉴于2、中的两种运行方式都比较麻烦，npm命令本身可以引导任务执行，基本玩法就是结合 package.json 文件中的 scripts 对象进行相关配置即可，其中package.json这个文件就是npm的标准的说明文件，包括当前项目的依赖模块，自定义的脚本任务等。
   

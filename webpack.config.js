@@ -11,7 +11,7 @@ module.exports ={
     devtool: 'eval-source-map',
     // __dirname 会获取当前文件的目录，不包括当前文件，但是 __filename 也是路径，包括文件本身，二者均是node自带的全局变量
     // 有了这两个全局变量的路径，后边添加的路径要使用绝对路径，因为他是按照据对路径的解析方式拼接
-    entry:__dirname + '/app/main.js',// 唯一的入口文件
+    entry:__dirname + '/app/index.js',// 唯一的入口文件
     output:{
         path:__dirname + '/dev',// 打包后的文件存放的地方
         filename: 'bundle.js'// 打包后输出文件的文件名
@@ -21,9 +21,18 @@ module.exports ={
         extensions:[' ','.js','.jsx']
     },
     devServer: {
-        contentBase: "./public",//本地服务器所加载的页面所在的目录
+        // proxy: {
+        //     // 凡是 `/api` 开头的 http 请求，都会被代理到 localhost:3000 上，由 koa 提供 mock 数据。
+        //     // koa 代码在 ./mock 目录中，启动命令为 npm run mock
+        //     '/config.json': {
+        //         target: 'http://v.juhe.cn/toutiao/index',
+        //         secure: false
+        //     }
+        // },
+
+        contentBase: "./app",//本地服务器所加载的页面所在的目录
         historyApiFallback: true,//不跳转
-        // inline: true//实时刷新
+        inline: true//实时刷新
     },
     // 这里是针对文件模块化的设置
     module: {
@@ -51,6 +60,18 @@ module.exports ={
                 exclude: /node_modules/
             },
 
+            {
+                test:/\.(png|woff|woff2|svg|ttf|eot)($|\?)/i,
+                use:{
+                    loader:"url-loader?limit=5000"
+                },
+            },
+            {
+                test:/\.(png|gif|jpg|jpeg|bmp)$/i,
+                use:{
+                    loader:"'url-loader?limit=5000'"
+                },
+            },
 
             {
                 test: /\.css$/,
