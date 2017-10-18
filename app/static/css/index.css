@@ -9,7 +9,7 @@ html {
     /*color: #ff0000;*/
 }
 
-body {
+html,body {
     margin: 0;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }

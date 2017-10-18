@@ -2,7 +2,6 @@ import React from 'react'
 import CSSModules from 'react-css-modules';
 import styles from '../components/loginComponent/loginComponent.css'
 import  commonCss from '../static/css/common.css'
-import  fontCss from '../static/css/font.css'
 
 class App extends React.Component {
     render() {
@@ -22,6 +21,9 @@ class App extends React.Component {
                 <div className='icon-search' style={{color:'red',fontSize:30}}></div>
                 <br/>
                 <div className='icon-search' style={{width:100,height:100}}></div>
+                <span>字体图标在本地组件引入的使用</span>
+                <br/>
+                <div className={styles.background} style={{width:100,height:100}}></div>
                 <span>字体图标在本地组件引入的使用</span>
                 <br/>
                 <br/>
