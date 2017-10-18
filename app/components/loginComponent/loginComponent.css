@@ -51,3 +51,8 @@ h2{
 p{
     color: #ff0000;
 }
+.background{
+    /*这里的路径应该是绝对路径*/
+    background-image: url(/static/images/123.jpeg);
+    /*background-image: url(./app/components/loginComponent/123.jpeg);*/
+}

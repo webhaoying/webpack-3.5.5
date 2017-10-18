@@ -18,7 +18,6 @@ class IndexHome extends React.PureComponent {
     render() {
         console.log(this.props);
         console.log(this.state.checking);
-        alert('在渲染页面');
         return (
             <div>
                 {
@@ -59,7 +58,7 @@ class IndexHome extends React.PureComponent {
             // 此时的setState势必会导致状态的改变  此时如果获得state值 并不会拿到最新的statw赋值，state的最新赋值是在render中才可以拿到的  也就是说在改变之后，只能在针对这次state状态改变的render中获得
 
             this.setState({
-                checking: true
+                checking: false
             })
                 console.log(this.state.checking)
         }

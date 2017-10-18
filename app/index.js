@@ -11,7 +11,7 @@ const  store = configureStore();
 
 // 通用样式
 import './static/css/common.css'
-import './static/css/font.css'
+// import './static/css/font.css'
 
 
 render(
