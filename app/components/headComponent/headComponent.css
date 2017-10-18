@@ -1,0 +1,18 @@
+/**
+ * Created by roboterra_rd on 2017/10/13.
+ */
+.header_container{
+    margin-bottom: 200px;
+    width:100%;
+    text-align: center;
+}
+
+.list li{
+    float: left;
+    color:yellow;
+    list-style: none;
+    width: 100px;
+}
+.list span{
+    color:red;
+}

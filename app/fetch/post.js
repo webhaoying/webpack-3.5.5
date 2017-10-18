@@ -5,6 +5,8 @@
 function obj2params(obj) {
     var result = '',item;
     for (item in obj) {
+        // 此处使用encodeURIComponent  是因为避免传过去的值  被&等符号分隔开
+        // 比如 如果 username = 'a&foo=boo' 而不用 encodeURIComponent 的话，整个参数就成了 username=a&foo=boo
         result += '&' + item + '=' + encodeURIComponent(obj[item]);
     }
 

@@ -4,7 +4,7 @@ import common from '../../static/css/common.css'
 class Detail extends React.Component {
     render() {
         return (
-            <p className={common.listLink}>Detail页面，接收到的参数：{this.props.params.id}</p>
+            <p className={common.listLink}>Detail，url参数：{this.props.params.id}</p>
         )
     }
 }
