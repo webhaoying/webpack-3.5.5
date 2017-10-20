@@ -14,7 +14,6 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
  只是js文件中需要做如下的更改：
  import React from 'react';
  //引入react-css-moudles 组件
- import CSSModules from 'react-css-modules';
  //引入的时候 命名自由，但是导出的时候名字要保持一只
  import styles from './loginComponent.css'
  // 导出的时候
@@ -26,12 +25,12 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import CSSModules from 'react-css-modules';
 import styles from './loginComponent.css'
 
-class LoginComponent extends React.Component {
+class LoginComponent extends React.PureComponent {
     constructor(props, context) {
         // 获取父组件的所有的属性
         super(props, context);
-        //  利用插件进行检查是否该组件是不是有状态改变  提高效率
-        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        //  利用插件进行检查是否该组件是不是有状态改变  提高效率  也可以利用 React.PureComponent来实现
+        // this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         // 初始化定义初始的状态
         this.state = {
             username: '',
@@ -40,38 +39,36 @@ class LoginComponent extends React.Component {
     }
     render() {
         return (
-            <div styleName="middleContent">
-                <div styleName="haha">这里是使用的react-css-modules</div>
-                <p>这里是登录页面，在这里完成登录</p>
+            <div styleName="login_container">
+                <h2 styleName="login_header">登录</h2>
                 <form action="" styleName="login_form" >
                     <ul >
-                        <li><label htmlFor="account">账号</label>
+                        <li><label htmlFor="account">账号:</label>
                             <input
                                id="account"
                                type="text"
                                placeholder="请输入邮箱"
-                               value={this.state.username}
                                onChange={this.changeUnameHandle.bind(this)}
                            />
                         </li>
                         <li>
-                            <label htmlFor="account">密码</label>
+                            <label htmlFor="password">密码:</label>
                             <input
-                                id="account"
+                                id="password"
                                 type="text"
                                 placeholder="请输入密码"
-                                value={this.state.passname}
                                 onChange={this.changePasswordHandle.bind(this)}
                             />
                         </li>
                         <li>
-                            <span>动态显示：{this.state.username}</span>
+                            <span>动态显示账号：{this.state.username}</span>
                         </li>
                         <li>
-                            <button type="button" className="btn_login" onClick={this.clickHandle.bind(this)}>点击登录+ajax(fetch)</button>
-                            <Link to="/register" >
-                                <span styleName="registerWarn">没有密码？去注册</span>
+                            <button type="button" styleName="btn_login" onClick={this.clickHandle.bind(this)}>点击登录</button>
+                            <Link to="/register" styleName="register_warn" >
+                                没有密码？去注册
                             </Link>
+
                         </li>
                     </ul>
 

@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute } from 'react-router'
 import App from '../containers/App'
 import Home from '../containers/Home'
 import Hello from '../containers/Hello'
-import Homepage from '../containers/HomePage'
+import Homepage from '../containers/HomeBox/HomePage.js'
 
 import Login from '../containers/login/login.js'
 import Register from '../containers/register/register.js'
@@ -38,6 +38,7 @@ class RouteMap extends React.Component {
                     <IndexRoute component={Login}/>
                     <Route path='register' component={Register}/>
                     <Route path='hello' component={Hello}/>
+                    <Route path='hello2' component={Hello}/>
                     <Route path="*" component={NotFound}/>
                 </Route>
             </Router>

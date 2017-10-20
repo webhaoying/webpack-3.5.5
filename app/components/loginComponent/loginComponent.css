@@ -2,14 +2,10 @@
  * Created by roboterra_rd on 2017/10/12.
  */
 .com{
-    font-size:30px;
+    font-size:20px;
     width:600px;
 }
-.haha{
-    color: #0f0;
-    font-size:20px;
-}
-.middleContent{
+.login_container{
     /* 这里的composes属性，就会在组件引用middleContent属性的时候，会复用了com属性，如果属性名有重复，按照middleContent执行*/
     /* CSS Modules 只会转变类选择器*/
     /*同时 css Modules 建议遵循以下原则：
@@ -29,15 +25,26 @@
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
+    /*这里是配合composes来使用*/
     composes:com;
 }
 
-.middleContent p{
+.login_container p{
     text-align: center;
 }
-.registerWarn {
-    margin-left:10px;
-    color: red;
+
+.login_form{
+    background: lightyellow;
+    padding: 20px;
+
+}
+.login_form ul li input{
+    color: blue;
+    font-size: 14px;
+    border-radius: 3px;
+    width:200px;
+    height: 30px;
+    box-shadow: none;
 }
 .login_form ul li{
     width:90%;
@@ -45,11 +52,32 @@
     list-style: none;
     margin-top: 20px;
 }
-h2{
-    color: #ff0000;
+.login_header{
+    text-align: center;
+    letter-spacing: 16px;
 }
-p{
-    color: #ff0000;
+
+.register_warn {
+    margin-left:10px;
+    color: red;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight:500;
+    float: right;
+    display: table-cell;
+    vertical-align: middle;
+    height: 30px;
+    line-height: 30px;
+}
+.btn_login{
+    height:30px;
+    line-height: 30px;
+    font-size: 16px;
+    color: #fff;
+    width:40%;
+    border-radius: 4px;
+    background: lightgreen;
+    border:none;
 }
 .background{
     /*这里的路径应该是绝对路径*/

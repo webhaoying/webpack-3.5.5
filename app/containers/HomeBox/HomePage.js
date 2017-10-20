@@ -1,6 +1,6 @@
 import React from 'react'
-import HeaderComponent from '../components/headComponent/headComponent.js'
-class App extends React.Component {
+import HeaderComponent from '../../components/headComponent/headComponent.js'
+class HomePage extends React.Component {
     render() {
         console.log(this.props.children);
         return (
@@ -13,4 +13,4 @@ class App extends React.Component {
     }
 }
 
-export default App
+export default HomePage
