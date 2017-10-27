@@ -8,7 +8,9 @@
     "start": "  NODE_ENV='dev' webpack --progress --colors",
     "build": " NODE_ENV='这里定义为产品环境' webpack --config ./webpack.prod.js  --progress --colors ",
     "server": "NODE_ENV='这里定义NODE_ENV这个nodeJs的全局变量成dev，即开发版本'  webpack-dev-server --open",
-    "arg": "node app/arg --ss  tom"
+    "serverCssModules": "NODE_ENV='这里定义NODE_ENV这个nodeJs的全局变量成dev，即开发版本'  webpack-dev-server --config ./webpack.config.CssModules.js --open",
+    "arg": "node app/arg --ss  tom",
+    "mock": "node ./mock/server.js "
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,12 @@
     "postcss-loader": "^2.0.6",
     "react-css-modules": "^4.7.1",
     "style-loader": "^0.18.2",
+    "koa": "^1.2.2",
+    "koa-router": "^5.4.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "open-browser-webpack-plugin": "0.0.2",
+    "url-loader": "^0.5.7",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   },
@@ -43,6 +51,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "redux": "^3.5.2",
-    "url-loader": "^0.5.7"
+    "react-swipe": "^5.0.5"
+
   }
 }

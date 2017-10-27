@@ -8,8 +8,8 @@ class Home extends React.PureComponent {
             <div>
                 <h1> 主页</h1>
                 <p>Home 这里是登录成功之后的页面</p>
-                    <Link to="/homepage/list" activeClassName={common.listLink}>
-                        <span className={common.listLink}> to list</span>
+                    <Link to="/homepage/list" >
+                        <span > to list</span>
                     </Link>
             </div>
         )

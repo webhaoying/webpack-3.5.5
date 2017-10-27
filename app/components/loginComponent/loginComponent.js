@@ -40,44 +40,48 @@ class LoginComponent extends React.Component {
     }
     render() {
         return (
-            <div styleName="middleContent">
-                <div styleName="haha">这里是使用的react-css-modules</div>
-                <p>这里是登录页面，在这里完成登录</p>
-                <form action="" styleName="login_form" >
-                    <ul >
-                        <li><label htmlFor="account">账号</label>
-                            <input
-                               id="account"
-                               type="text"
-                               placeholder="请输入邮箱"
-                               value={this.state.username}
-                               onChange={this.changeUnameHandle.bind(this)}
-                           />
-                        </li>
-                        <li>
-                            <label htmlFor="account">密码</label>
-                            <input
-                                id="account"
-                                type="text"
-                                placeholder="请输入密码"
-                                value={this.state.passname}
-                                onChange={this.changePasswordHandle.bind(this)}
-                            />
-                        </li>
-                        <li>
-                            <span>动态显示：{this.state.username}</span>
-                        </li>
-                        <li>
-                            <button type="button" className="btn_login" onClick={this.clickHandle.bind(this)}>点击登录+ajax(fetch)</button>
-                            <Link to="/register" >
-                                <span styleName="registerWarn">没有密码？去注册</span>
-                            </Link>
-                        </li>
-                    </ul>
+            <div>
+                LoginComponent
+                {/*<div styleName="middleContent">*/}
+                    {/*<div styleName="haha">这里是使用的react-css-modules</div>*/}
+                    {/*<p>这里是登录页面，在这里完成登录</p>*/}
+                    {/*<form action="" styleName="login_form" >*/}
+                        {/*<ul >*/}
+                            {/*<li><label htmlFor="account">账号</label>*/}
+                                {/*<input*/}
+                                    {/*id="account"*/}
+                                    {/*type="text"*/}
+                                    {/*placeholder="请输入邮箱"*/}
+                                    {/*value={this.state.username}*/}
+                                    {/*onChange={this.changeUnameHandle.bind(this)}*/}
+                                {/*/>*/}
+                            {/*</li>*/}
+                            {/*<li>*/}
+                                {/*<label htmlFor="account">密码</label>*/}
+                                {/*<input*/}
+                                    {/*id="account"*/}
+                                    {/*type="text"*/}
+                                    {/*placeholder="请输入密码"*/}
+                                    {/*value={this.state.passname}*/}
+                                    {/*onChange={this.changePasswordHandle.bind(this)}*/}
+                                {/*/>*/}
+                            {/*</li>*/}
+                            {/*<li>*/}
+                                {/*<span>动态显示：{this.state.username}</span>*/}
+                            {/*</li>*/}
+                            {/*<li>*/}
+                                {/*<button type="button" className="btn_login" onClick={this.clickHandle.bind(this)}>点击登录+ajax(fetch)</button>*/}
+                                {/*<Link to="/register" >*/}
+                                    {/*<span styleName="registerWarn">没有密码？去注册</span>*/}
+                                {/*</Link>*/}
+                            {/*</li>*/}
+                        {/*</ul>*/}
 
 
-                </form>
+                    {/*</form>*/}
+                {/*</div>*/}
             </div>
+
         )
     }
     // 针对这种只是改变自己的组件的某个状态值的方法  都定义在该component中，称之为木偶组件，因为他不跟别的组件进行交互
@@ -102,6 +106,6 @@ class LoginComponent extends React.Component {
     }
 }
 
- // export default LoginComponent
+ export default LoginComponent
 // 使用了 react-css-modules 插件之后的导出
-export default CSSModules(LoginComponent, styles);
+// export default CSSModules(LoginComponent, styles);

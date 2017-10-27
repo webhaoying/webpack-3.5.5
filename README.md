@@ -96,4 +96,85 @@ npm install --save-dev postcss-loader autoprefixer
    - 前者中默认使用 webpack.config.js 作为配置文件，而后者中强制使用 webpack.production.config.js 作为配置文件
    - 前者 `NODE_ENV=dev` 而后者 `NODE_ENV=production` ，标识不同的环境。而这个 `"dev" "production"` 可以在代码中通过 `process.env.NODE_ENV` 获取。
     - 前者中默认使用 webpack.config.js 作为配置文件，而后者中强制使用 webpack.production.config.js 作为配置文件
+   * 8、webpack中关于本地搭建的服务器的配置
+````
+devServer: {
+        proxy: {
+            // 凡是 `/api` 开头的 http 请求，都会被代理到 localhost:3000 上，由 koa 提供 mock 数据。
+            // koa 代码在 ./mock 目录中，启动命令为 npm run mock
+            /*
+            * 这里是在配置针对koa这个模块来配置自己搭建的3000端口的服务器
+            * 自己运行的本地服务器是8000端口，但是api却是3000端口，这里的跨域访问正是通过webpack内部执行的一个代理，将8000端口的请求，转向到了3000端口
+            * */
+            '/api': {
+                target: 'http://localhost:3000',
+                secure: false
+            }
+        },
+        contentBase: "./app", //本地服务器所加载的页面所在的目录
+        historyApiFallback: true, //不跳转
+        inline: true, //实时刷新
+    },
+````
+* 9、关于webpack的配置文件
+
+ >1、webpack的配置文件可以在package.json中指定,默认的是使用webpack.config.js
+ 指定自定义的配置文件的话 使用 --config '接上配置文件的相对package.json的路径'  打包本地文件的时候可以指定自定义配置文件 运行本地服务的时候也可以指定自定义配置文件
+ ````
+ "build": " NODE_ENV='这里定义为产品环境' webpack --config ./webpack.prod.js  --progress --colors ",
+     "server": "NODE_ENV='这里定义NODE_ENV这个nodeJs的全局变量成dev，即开发版本'  webpack-dev-server --open",
+     "serverCssModules": "NODE_ENV='这里定义NODE_ENV这个nodeJs的全局变量成dev，即开发版本'  webpack-dev-server --config ./webpack.config.CssModules.js --open",
+ ````
+ * 10、关于本地搭建服务器然后模仿后台甩接口的过程
+ 
+  >1、我们利用的是koa以及koa-router这个组件  需要修改package.json文件，来运行该服务器（一个独立的terminal）
+  来实现后台数据的模仿  后台部分的代码在mock文件夹下
+  >2、需要更改webpack的配置文件中的devServer 设置代理 详见8中的配置
+  ````
+  
+  ````
+  * 11、文件中使用的fetch  原生支持promise的ajax的替代方法
+  
+    >1、在代码中的fetch文件夹下，封装了get和post请求  详细阅读即可很清楚的了解封装和使用
+    >2、fetch方法首先返回的是promise对象，需要json()或者text()方法处理之后获得我们想要的数据
+````
+    
+````
+ * 12、css Modules的使用中技巧
+  
+    >1、参考阅读网址为：https://zhuanlan.zhihu.com/p/20495964
+    >2、大体上cssModules使用中，css文件中只能使用普通的类选择器才定义样式，如果涉及到样式类名的复用，composes来实现，composes可以引用该css文件中的类选择器来复用，也可以引入其他css文件（通常为通用的样式文件）中的类
+    
+````
+        /* settings.css */
+        .primary-color {
+          color: #f40;
+        }
+        
+        /* components/Button.css */
+        .base { /* 所有通用的样式 */ }
+        
+        .primary {
+          composes: base;
+          composes: primary-color from './settings.css';
+          /* primary 其它样式 */
+        }
+````
+   >3、个人感觉这个cssModules的使用，目前（20171026）使用起来还是感觉很别扭，style.className的使用模式也是比较拗手，因此基本确定项目中的css目前采用非模块化开发
+    >4、如果一个标签想要引用多个样式，在使用非模块css的时候直接添加即可，如果使用模块化开发的时候，也是可以拼接来使用多个css类的样式，如下所示
+````
+// 非模块化的css开发 多个类的引用
+<div className='className1 className2'></div> 
+````
+
+````
+// 模块化的css开发 多个类的引用
+
+//组件中引入css文件 在写css文件的时候不用导出，
+//就跟普通css或者less文件一样的书写
+import style from 'xx.css' 
+// 注意{style.aaa}+' '+{style.bbb} 引号中是有一个空格的是  实际上变量{style.aaa}和{style.bbb}都会被解析成字符串的  所以在使用多个class类名的时候就是在做字符串的拼接
+<div className={style.aaa}+' '+{style.bbb}></div> 
+````
+
      

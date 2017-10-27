@@ -5,6 +5,7 @@ import LoginComponent from '../../components/loginComponent/loginComponent.js'
 import HelloWorld from '../../components/loginComponent/test.js'
 import { hashHistory } from 'react-router'
 import { loginFetch } from '../../fetch/login/loginFetch.js'
+import { testMock } from '../../fetch/login/test.js'
 
 class IndexHome extends React.PureComponent {
     constructor(props, context) {
@@ -30,6 +31,7 @@ class IndexHome extends React.PureComponent {
                         :<LoginComponent loginHandle={this.loginHandle.bind(this)}/>
 
                 }
+                <button onClick={this.testMockFn.bind(this)} >点击这里进行登录</button>
                 <HelloWorld/>
             </div>
         )
@@ -63,6 +65,17 @@ class IndexHome extends React.PureComponent {
                 console.log(this.state.checking)
         }
     }
+    // testMock
+
+    testMockFn(){
+        testMock().then(
+            function (data) {
+                return data.json();
+            }
+        ).then(function (json) {
+            console.log(json[0].title);
+        })
+    }
     // 登录过程
     loginHandle(username,password) {
         // 保存用户名
@@ -76,14 +89,12 @@ class IndexHome extends React.PureComponent {
         // let username1='haohao1@163.com';
         // let username1=username;
         let that = this;
+
         loginFetch(username,password).then(function (data) {
             return data.json();
         }).then((function (response) {
-            // promise里边没有this  要不就在外边定义that传进来 ，要不就bind(this)
+            // 注意this的指向 要不就在外边定义that传进来 ，要不就bind(this)
             // console.log(this);
-            console.log(that);
-            console.log(this);
-            console.log(response);
             // 登录成功
             if(response.errcode==-1){
                 console.log('login  sucess');

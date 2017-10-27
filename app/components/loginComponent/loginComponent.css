@@ -29,7 +29,7 @@
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
-    composes:com;
+    /*composes:com;*/
 }
 
 .middleContent p{
@@ -52,7 +52,8 @@ p{
     color: #ff0000;
 }
 .background{
+    height:100px;
     /*这里的路径应该是绝对路径*/
     background-image: url(/static/images/123.jpeg);
-    /*background-image: url(./app/components/loginComponent/123.jpeg);*/
+    /*background-image: url(./components/loginComponent/123.jpeg);*/
 }
