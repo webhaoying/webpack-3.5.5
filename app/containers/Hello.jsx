@@ -52,6 +52,11 @@ function mapStateToProps(state) {
 //将actions的派发 绑定到组件的属性当中 然后子元素绑定引用：actions={this.props.userinfoActions}
 // 在调用的时候 就在该属性中调用就行了
 //bindActionCreators(userinfoActions, dispatch)  是将那些action生成函数绑定到props
+// 简单来说就是，调用了mapDispatchToProps之后我们就可以在引用的时候这么写 this.props.userinfoActions.login({
+            userid: 'abc',
+            city: 'beijing'
+        })
+// 如果不用mapDispatchToProps，我们就要引入对应的action，以及从props中获取dispatch方法，然后每一次的action的派发，都要dispatch(actions.actionName)
 //  注意区分 action本身是一个对象，其中必须包含一个字段type，然后其余的字段自定义
 // action 生成函数就是一个专门用来返回action的函数
 function mapDispatchToProps(dispatch) {
